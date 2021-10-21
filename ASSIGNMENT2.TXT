@@ -1,0 +1,108 @@
+1.    SELECT D.dname
+       FROM dept D
+       LEFT JOIN emp E
+       ON D.deptno= E.deptno
+       WHERE E.deptno IS NULL
+
+2.     SELECT JOB,ENAME
+       FROM EMP
+       WHERE JOB LIKE 'PRESIDENT'
+
+3.     SELECT ename ,job , location='NEWYORK' , comm
+       FROM emp
+       WHERE  (comm)>1000
+
+4.     SELECT COUNT(*) AS empno, location ='chicago'
+       FROM emp
+
+5.     SELECT  ename , location ='chicago'
+       FROM emp
+
+6.     SELECT ENAME, ename ,D.LOC
+       FROM DEPT D
+       FULL JOIN EMP E
+       ON D.DEPTNO= E.DEPTNO
+       ORDER BY D.LOC
+
+7.     SELECT ename ,D.loc
+       FROM dept D
+       FULL JOIN EMP E
+       ON D.deptno= E.deptno
+       ORDER BY D.loc
+
+8.     SELECT E.ename, M.ename 'MANAGER', M.hiredate 'MANAGER HIREDATE', E.hiredate
+       FROM emp E,emp M
+       WHERE E.MGR = M.empno AND E.hiredate<M.hiredate;
+
+9.     SELECT COUNT(DISTINCT E.MGR)AS' without listing'
+       FROM emp E , emp W
+       WHERE E.MGR = W.empno;
+
+10.    SELECT DISTINCT E.ename,E.job
+       FROM EMP E
+       WHERE E.MGR IS NULL;
+
+11.    SELECT ename , deptno
+       FROM emp 
+       WHERE ename LIKE '%smith%';
+
+12.    SELECT ename , JOB='SALESMAN'
+       FROM emp
+       WHERE job NOT IN('BOSTON');
+
+13.    SELECT *
+       FROM emp E
+       JOIN DEPT D
+       ON E.deptno = D.deptno;
+
+14.    SELECT ename,job, sal
+       FROM emp
+       WHERE Job LIKE '%SALESMAN%' AND SAL <
+                                             (SELECT SAL
+                                              FROM   EMP
+                                              WHERE ENAME = 'MILLER');
+
+15.     SELECT *
+        FROM emp E
+        JOIN DEPT D ON E.DEPTNO = D.DEPTNO
+        WHERE D.LOC LIKE 'CHICAGO';
+
+16.     SELECT * FROM EMP
+        WHERE SAL > 
+        ANY(SELECT MIN(SAL)FROM EMP WHERE MGR=EMPNO GROUP BY EMPNO);
+
+17.      SELECT E.ENAME , E.JOB,D.DNAME, E.DEPTNO
+         FROM EMP E
+         LEFT JOIN DEPT D 
+         ON E.DEPTNO = D.DEPTNO
+         WHERE D.DNAME LIKE '%ACCOUNT%';
+
+19.     Select dname,
+         CASE
+        WHEN dname = 'sales' THEN 'sales'
+        Else 'non sales'
+        END AS 'check'
+        FROM DEPT  
+
+18.      SELECT DISTINCT E.ename, M.MGR
+         FROM emp E, emp M
+         WHERE E.empno = M.MGR;
+
+20.      Select sal,
+         CASE
+         WHEN sal> 1000 THEN sal
+         Else 1000
+         END AS 'default salary'
+         FROM emp
+
+21.      Select  ename , empno ,sal,
+          CASE
+          WHEN sal < 1000 THEN 'less' 
+          WHEN sal > 2500 THEN 'high'
+	  ELSE 'medium'
+	  END AS 'desc'
+          FROM emp
+
+
+
+
